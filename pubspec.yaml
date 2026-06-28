@@ -1,0 +1,102 @@
+name: moneymate_id
+description: "MoneyMate ID — Personal Finance & Wealth Management for Indonesia"
+publish_to: "none"
+version: 0.1.0+1
+
+environment:
+  sdk: ">=3.4.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # ── State Management ─────────────────────────────
+  flutter_riverpod: ^2.5.1
+  riverpod_annotation: ^2.3.5
+
+  # ── Navigation ────────────────────────────────────
+  go_router: ^14.2.0
+
+  # ── Local Database (offline-first) ───────────────
+  isar: ^3.1.0+1
+  isar_flutter_libs: ^3.1.0+1
+  path_provider: ^2.1.3
+
+  # ── Firebase (wired in later; left in for when cloud sync is enabled) ──
+  # firebase_core: ^3.3.0
+  # firebase_auth: ^5.1.4
+  # cloud_firestore: ^5.2.1
+  # firebase_storage: ^12.1.1
+
+  # ── UI / Design ───────────────────────────────────
+  google_fonts: ^6.2.1
+  flutter_svg: ^2.0.10+1
+  cached_network_image: ^3.4.0
+  shimmer: ^3.0.0
+  lottie: ^3.1.2
+  flutter_animate: ^4.5.0
+  fl_chart: ^0.68.0
+  percent_indicator: ^4.2.3
+  flutter_staggered_animations: ^1.1.1
+  glassmorphism: ^3.0.0
+
+  # ── Utilities ─────────────────────────────────────
+  intl: ^0.19.0
+  uuid: ^4.4.2
+  equatable: ^2.0.5
+  dartz: ^0.10.1
+  collection: ^1.18.0
+  logger: ^2.4.0
+
+  # ── Local auth / security ────────────────────────
+  local_auth: ^2.3.0
+  flutter_secure_storage: ^9.2.2
+  shared_preferences: ^2.3.2
+
+  # ── Export ────────────────────────────────────────
+  pdf: ^3.11.0
+  excel: ^4.0.6
+  share_plus: ^9.0.0
+  path: ^1.9.0
+
+  # ── Media ─────────────────────────────────────────
+  image_picker: ^1.1.2
+
+  # ── Notifications ─────────────────────────────────
+  flutter_local_notifications: ^17.2.2
+
+  cupertino_icons: ^1.0.8
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+  build_runner: ^2.4.11
+  isar_generator: ^3.1.0+1
+  riverpod_generator: ^2.4.0
+  custom_lint: ^0.6.4
+  riverpod_lint: ^2.3.10
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/icons/
+    - assets/images/
+    - assets/icons/banks/
+    - assets/icons/ewallets/
+    - assets/icons/investments/
+
+  # Custom font (Plus Jakarta Sans or Inter recommended for fintech feel;
+  # google_fonts package below fetches at build time so this block is
+  # optional — included for offline/pinned-font builds)
+  # fonts:
+  #   - family: PlusJakartaSans
+  #     fonts:
+  #       - asset: assets/fonts/PlusJakartaSans-Regular.ttf
+  #       - asset: assets/fonts/PlusJakartaSans-Medium.ttf
+  #         weight: 500
+  #       - asset: assets/fonts/PlusJakartaSans-SemiBold.ttf
+  #         weight: 600
+  #       - asset: assets/fonts/PlusJakartaSans-Bold.ttf
+  #         weight: 700
