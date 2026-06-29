@@ -18,8 +18,13 @@ dependencies:
   go_router: ^14.2.0
 
   # ── Local Database (offline-first) ───────────────
-  isar: ^3.1.0+1
-  isar_flutter_libs: ^3.1.0+1
+  # NOTE: isar/isar_flutter_libs removed — the original isar.dev package
+  # (latest 3.1.0+1) hasn't been updated in years and keeps failing under
+  # modern Android Gradle Plugin versions (namespace + manifest package
+  # errors). Not currently used by any code in this project yet, so it's
+  # safe to leave out until the Accounts/Transactions modules need local
+  # storage — at that point, use the actively-maintained community fork
+  # `isar_community` / `isar_community_flutter_libs` instead.
   path_provider: ^2.1.3
 
   # ── Firebase (wired in later; left in for when cloud sync is enabled) ──
@@ -72,7 +77,6 @@ dev_dependencies:
     sdk: flutter
   flutter_lints: ^4.0.0
   build_runner: ^2.4.11
-  isar_generator: ^3.1.0+1
   riverpod_generator: ^2.4.0
 
 flutter:
@@ -84,17 +88,3 @@ flutter:
     - assets/icons/banks/
     - assets/icons/ewallets/
     - assets/icons/investments/
-
-  # Custom font (Plus Jakarta Sans or Inter recommended for fintech feel;
-  # google_fonts package below fetches at build time so this block is
-  # optional — included for offline/pinned-font builds)
-  # fonts:
-  #   - family: PlusJakartaSans
-  #     fonts:
-  #       - asset: assets/fonts/PlusJakartaSans-Regular.ttf
-  #       - asset: assets/fonts/PlusJakartaSans-Medium.ttf
-  #         weight: 500
-  #       - asset: assets/fonts/PlusJakartaSans-SemiBold.ttf
-  #         weight: 600
-  #       - asset: assets/fonts/PlusJakartaSans-Bold.ttf
-  #         weight: 700
