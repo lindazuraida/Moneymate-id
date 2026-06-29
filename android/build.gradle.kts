@@ -20,9 +20,10 @@ subprojects {
 // declare a `namespace` in their own build.gradle, which AGP 8+ requires.
 // This assigns a fallback namespace to any Android library subproject that
 // is missing one, instead of needing to patch the plugin's source directly.
-// (Kotlin DSL version of the commonly recommended Groovy workaround.)
+// Uses pluginManager.withPlugin (not afterEvaluate) to avoid "project already
+// evaluated" timing errors with the Flutter Gradle plugin.
 subprojects {
-    afterEvaluate {
+    pluginManager.withPlugin("com.android.library") {
         extensions.findByName("android")?.let { ext ->
             val getNamespace = ext.javaClass.getMethod("getNamespace")
             val currentNamespace = getNamespace.invoke(ext) as? String
