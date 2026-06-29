@@ -75,7 +75,7 @@ class AppTheme {
         iconTheme: IconThemeData(color: textPrimary),
       ),
 
-      cardTheme: CardThemeData(
+      cardTheme: CardTheme(
         color: surface,
         elevation: AppElevation.card,
         margin: EdgeInsets.zero,
@@ -213,7 +213,7 @@ class AppTheme {
         ),
       ),
 
-      dialogTheme: DialogThemeData(
+      dialogTheme: DialogTheme(
         backgroundColor: surface,
         elevation: AppElevation.modal,
         shape: RoundedRectangleBorder(
