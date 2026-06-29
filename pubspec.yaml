@@ -84,3 +84,17 @@ flutter:
     - assets/icons/banks/
     - assets/icons/ewallets/
     - assets/icons/investments/
+
+  # Custom font (Plus Jakarta Sans or Inter recommended for fintech feel;
+  # google_fonts package below fetches at build time so this block is
+  # optional — included for offline/pinned-font builds)
+  # fonts:
+  #   - family: PlusJakartaSans
+  #     fonts:
+  #       - asset: assets/fonts/PlusJakartaSans-Regular.ttf
+  #       - asset: assets/fonts/PlusJakartaSans-Medium.ttf
+  #         weight: 500
+  #       - asset: assets/fonts/PlusJakartaSans-SemiBold.ttf
+  #         weight: 600
+  #       - asset: assets/fonts/PlusJakartaSans-Bold.ttf
+  #         weight: 700
