@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import '../widgets/app_shell.dart';
 import '../widgets/coming_soon_page.dart';
 import '../../features/dashboard/presentation/pages/dashboard_page.dart';
+import '../../features/accounts/presentation/pages/accounts_page.dart';
 import 'app_routes.dart';
 
 /// Root navigator key — exposed so non-widget code (e.g. notification
@@ -32,32 +33,15 @@ final routerProvider = Provider<GoRouter>((ref) {
           ),
 
           // ── Tab 1: Accounts ──────────────────────────────
+          // Halaman tambah/edit akun dibuka via Navigator.push langsung
+          // dari AccountsPage (lihat accounts_page.dart), bukan lewat
+          // GoRoute terpisah — lebih simpel untuk alur modal/form seperti
+          // ini dan menghindari duplikasi state antara GoRouter & halaman.
           StatefulShellBranch(
             routes: [
               GoRoute(
                 path: AppRoutes.accounts,
-                builder: (context, state) => const ComingSoonPage(
-                  title: 'Money Accounts',
-                  icon: Icons.account_balance_wallet_outlined,
-                ),
-                routes: [
-                  GoRoute(
-                    path: 'add',
-                    parentNavigatorKey: rootNavigatorKey,
-                    builder: (context, state) => const ComingSoonPage(
-                      title: 'Add Account',
-                      icon: Icons.add_circle_outline,
-                    ),
-                  ),
-                  GoRoute(
-                    path: ':id',
-                    parentNavigatorKey: rootNavigatorKey,
-                    builder: (context, state) => ComingSoonPage(
-                      title: 'Account ${state.pathParameters['id']}',
-                      icon: Icons.account_balance_wallet_outlined,
-                    ),
-                  ),
-                ],
+                builder: (context, state) => const AccountsPage(),
               ),
             ],
           ),

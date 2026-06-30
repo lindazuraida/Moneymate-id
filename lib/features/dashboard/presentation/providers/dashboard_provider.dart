@@ -1,12 +1,12 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../accounts/presentation/providers/accounts_provider.dart';
 
 /// Aggregate financial snapshot shown on the dashboard.
 ///
-/// This is intentionally a plain data class with no Isar/Firestore
-/// annotations — it's a *view model*, assembled by aggregating data from
-/// the Accounts, Transactions, Debt, and Goals repositories once those
-/// modules exist. For now it's seeded with representative mock data so
-/// the dashboard UI can be built and reviewed independently.
+/// This is a *view model*, assembled by aggregating data from the
+/// Accounts, Transactions, Debt, and Goals repositories. `totalMoney`
+/// now comes from the real Accounts module; the rest stays as
+/// representative mock data until Transactions/Debt/Goals are built.
 class DashboardSnapshot {
   const DashboardSnapshot({
     required this.totalMoney,
@@ -30,26 +30,27 @@ class DashboardSnapshot {
 
   double get netWorth => totalMoney + totalAssets - totalDebt;
   double get remainingBudget => monthlyBudget - monthlyExpense;
-
-  static const mock = DashboardSnapshot(
-    totalMoney: 42500000,
-    totalAssets: 185000000,
-    totalDebt: 23750000,
-    monthlyIncome: 14500000,
-    monthlyExpense: 8230000,
-    monthlyBudget: 10000000,
-    savingGoalProgress: 0.64,
-    userName: 'Bayu',
-  );
 }
 
 /// Provides the current dashboard snapshot.
 ///
-/// Once the Accounts/Transactions/Debt/Goals repositories are built, this
-/// becomes a computed provider (`Provider`/`FutureProvider`) that watches
-/// those repositories and aggregates live data instead of returning mock.
+/// `totalMoney` is computed live from [totalBalanceProvider] (Accounts
+/// module). The remaining fields stay as placeholder values until
+/// Transactions, Debt, and Goals modules are built — at which point each
+/// will be swapped for its own live provider the same way totalMoney was.
 final dashboardSnapshotProvider = Provider<DashboardSnapshot>((ref) {
-  return DashboardSnapshot.mock;
+  final totalMoney = ref.watch(totalBalanceProvider);
+
+  return DashboardSnapshot(
+    totalMoney: totalMoney,
+    totalAssets: 185000000, // TODO: ganti dengan data Asset Manager
+    totalDebt: 23750000, // TODO: ganti dengan data Debt Manager
+    monthlyIncome: 14500000, // TODO: ganti dengan data Transactions
+    monthlyExpense: 8230000, // TODO: ganti dengan data Transactions
+    monthlyBudget: 10000000, // TODO: ganti dengan data Budget
+    savingGoalProgress: 0.64, // TODO: ganti dengan data Goals
+    userName: 'Bayu', // TODO: ganti dengan data profil pengguna
+  );
 });
 
 /// Whether monetary values are masked (privacy toggle) on the dashboard.
