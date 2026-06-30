@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../accounts/presentation/providers/accounts_provider.dart';
+import '../../../transactions/presentation/providers/transactions_provider.dart';
 
 /// Aggregate financial snapshot shown on the dashboard.
 ///
@@ -40,13 +41,15 @@ class DashboardSnapshot {
 /// will be swapped for its own live provider the same way totalMoney was.
 final dashboardSnapshotProvider = Provider<DashboardSnapshot>((ref) {
   final totalMoney = ref.watch(totalBalanceProvider);
+  final monthlyIncome = ref.watch(monthlyIncomeProvider);
+  final monthlyExpense = ref.watch(monthlyExpenseProvider);
 
   return DashboardSnapshot(
     totalMoney: totalMoney,
     totalAssets: 185000000, // TODO: ganti dengan data Asset Manager
     totalDebt: 23750000, // TODO: ganti dengan data Debt Manager
-    monthlyIncome: 14500000, // TODO: ganti dengan data Transactions
-    monthlyExpense: 8230000, // TODO: ganti dengan data Transactions
+    monthlyIncome: monthlyIncome,
+    monthlyExpense: monthlyExpense,
     monthlyBudget: 10000000, // TODO: ganti dengan data Budget
     savingGoalProgress: 0.64, // TODO: ganti dengan data Goals
     userName: 'Bayu', // TODO: ganti dengan data profil pengguna

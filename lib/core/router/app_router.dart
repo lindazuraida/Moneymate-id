@@ -5,6 +5,8 @@ import '../widgets/app_shell.dart';
 import '../widgets/coming_soon_page.dart';
 import '../../features/dashboard/presentation/pages/dashboard_page.dart';
 import '../../features/accounts/presentation/pages/accounts_page.dart';
+import '../../features/transactions/presentation/pages/transactions_page.dart';
+import '../../features/transactions/presentation/pages/add_transaction_page.dart';
 import 'app_routes.dart';
 
 /// Root navigator key — exposed so non-widget code (e.g. notification
@@ -51,10 +53,7 @@ final routerProvider = Provider<GoRouter>((ref) {
             routes: [
               GoRoute(
                 path: AppRoutes.transactions,
-                builder: (context, state) => const ComingSoonPage(
-                  title: 'Transactions',
-                  icon: Icons.receipt_long_outlined,
-                ),
+                builder: (context, state) => const TransactionsPage(),
               ),
             ],
           ),
@@ -91,10 +90,7 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: AppRoutes.transactionAdd,
         parentNavigatorKey: rootNavigatorKey,
-        builder: (context, state) => const ComingSoonPage(
-          title: 'Add Transaction',
-          icon: Icons.add_circle_outline,
-        ),
+        builder: (context, state) => const AddTransactionPage(),
       ),
       GoRoute(
         path: AppRoutes.budget,
