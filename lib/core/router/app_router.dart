@@ -7,6 +7,7 @@ import '../../features/dashboard/presentation/pages/dashboard_page.dart';
 import '../../features/accounts/presentation/pages/accounts_page.dart';
 import '../../features/transactions/presentation/pages/transactions_page.dart';
 import '../../features/transactions/presentation/pages/add_transaction_page.dart';
+import '../../features/budget/presentation/budget_page.dart';
 import 'app_routes.dart';
 
 /// Root navigator key — exposed so non-widget code (e.g. notification
@@ -95,10 +96,7 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: AppRoutes.budget,
         parentNavigatorKey: rootNavigatorKey,
-        builder: (context, state) => const ComingSoonPage(
-          title: 'Budget',
-          icon: Icons.pie_chart_outline,
-        ),
+        builder: (context, state) => const BudgetPage(),
       ),
       GoRoute(
         path: AppRoutes.debt,

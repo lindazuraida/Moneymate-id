@@ -1,6 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../accounts/presentation/providers/accounts_provider.dart';
 import '../../../transactions/presentation/providers/transactions_provider.dart';
+import '../../../budget/presentation/budget_provider.dart';
+import '../../../budget/domain/budget.dart';
 
 /// Aggregate financial snapshot shown on the dashboard.
 ///
@@ -44,15 +46,21 @@ final dashboardSnapshotProvider = Provider<DashboardSnapshot>((ref) {
   final monthlyIncome = ref.watch(monthlyIncomeProvider);
   final monthlyExpense = ref.watch(monthlyExpenseProvider);
 
+  // Total limit semua budget bulanan
+  final allBudgets = ref.watch(budgetsProvider).value ?? <Budget>[];
+  final monthlyBudget = allBudgets
+      .where((b) => b.period == BudgetPeriod.monthly)
+      .fold<double>(0, (s, b) => s + b.limitAmount);
+
   return DashboardSnapshot(
     totalMoney: totalMoney,
     totalAssets: 185000000, // TODO: ganti dengan data Asset Manager
-    totalDebt: 23750000, // TODO: ganti dengan data Debt Manager
+    totalDebt: 23750000,    // TODO: ganti dengan data Debt Manager
     monthlyIncome: monthlyIncome,
     monthlyExpense: monthlyExpense,
-    monthlyBudget: 10000000, // TODO: ganti dengan data Budget
+    monthlyBudget: monthlyBudget > 0 ? monthlyBudget : 10000000,
     savingGoalProgress: 0.64, // TODO: ganti dengan data Goals
-    userName: 'Bayu', // TODO: ganti dengan data profil pengguna
+    userName: 'Bayu',         // TODO: ganti dengan data profil pengguna
   );
 });
 
